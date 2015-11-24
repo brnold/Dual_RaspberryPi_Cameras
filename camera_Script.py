@@ -20,9 +20,6 @@ import os
 
 #Camera Command line
 
-cameraCommand = "raspistill -np %s.jpg" % (currentTime)
-os.system(cameraCommand)
-
 
 #Make a new dir command
 #Thanks, http://stackoverflow.com/questions/273192/in-python-check-if-a-directory-exists-and-create-it-if-necessary
@@ -34,8 +31,8 @@ def ensure_dir_cd_in(f):
 
 # Pin Definitons:
 pwmPin = 18 # Broadcom pin 18 (P1 pin 12)
-ledPin = 23 # Broadcom pin 23 (P1 pin 16)
-cameraButton = 17 # Broadcom pin 17 (P1 pin 11)
+ledPin = 19 # Broadcom pin 19 (P1 pin 35)
+cameraButton = 26 # Broadcom pin 26 (P1 pin 37)
 shutdownButton # Broadcom pin ?
 
 dc = 95 # duty cycle (0-100) for PWM pin
@@ -66,20 +63,20 @@ try:
         GPIO.output(ledPin, GPIO.LOW)
         time.sleep(0.075)
 
-    while 1:
-        if not GPIO.input(cameraButton): # camera button is pressed
-            pwm.ChangeDutyCycle(dc)
-            GPIO.output(ledPin, GPIO.LOW)
-        elif not GPIO.input(shutdownButton): # shutdown button is pressed
-            pwm.stop() # stop PWM
-            GPIO.cleanup() # cleanup all GPIO
-            os.system("sudo shutdown -h now") #this will abruptly halt now
-        else: # button is pressed:
-            pwm.ChangeDutyCycle(100-dc)
-            GPIO.output(ledPin, GPIO.HIGH)
-            time.sleep(0.075)
-            GPIO.output(ledPin, GPIO.LOW)
-            time.sleep(0.075)
+ #   while 1:
+ #       if not GPIO.input(cameraButton): # camera button is pressed
+ #           pwm.ChangeDutyCycle(dc)
+ #           GPIO.output(ledPin, GPIO.LOW)
+ #       elif not GPIO.input(shutdownButton): # shutdown button is pressed
+ #           pwm.stop() # stop PWM
+ #           GPIO.cleanup() # cleanup all GPIO
+ #           os.system("sudo shutdown -h now") #this will abruptly halt now
+ #       else: # button is pressed:
+ #           pwm.ChangeDutyCycle(100-dc)
+ #           GPIO.output(ledPin, GPIO.HIGH)
+ #           time.sleep(0.075)
+ #           GPIO.output(ledPin, GPIO.LOW)
+ #           time.sleep(0.075)
 except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
     pwm.stop() # stop PWM
     GPIO.cleanup() # cleanup all GPIO
