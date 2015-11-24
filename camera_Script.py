@@ -55,31 +55,31 @@ pwm.start(dc)
 ##Setup done
 print("Here we go! Press CTRL+C to exit, button shuts down the Pi (maybe")
 try:
-    while not GPIO.input(cameraButton) #wait for button depress
+    while not GPIO.input(cameraButton): #wait for button depress
 
-    currentTime = 'pic_' + time.strftime("%M_%S")
-    ensure_dir_cd_in(currentTime) #hopefully in the directory now
-
-    for x in range(0,3):  #Blick da LED
-        GPIO.output(ledPin, GPIO.HIGH)
-        time.sleep(0.075)
-        GPIO.output(ledPin, GPIO.LOW)
-        time.sleep(0.075)
-
-    while 1:
-        if not GPIO.input(cameraButton): # camera button is pressed
-            pwm.ChangeDutyCycle(dc)
-            GPIO.output(ledPin, GPIO.LOW)
-        elif not GPIO.input(shutdownButton): # shutdown button is pressed
-            pwm.stop() # stop PWM
-            GPIO.cleanup() # cleanup all GPIO
-            os.system("sudo shutdown -h now") #this will abruptly halt now
-        else: # button is pressed:
-            pwm.ChangeDutyCycle(100-dc)
-            GPIO.output(ledPin, GPIO.HIGH)
-            time.sleep(0.075)
-            GPIO.output(ledPin, GPIO.LOW)
-            time.sleep(0.075)
+      currentTime = 'pic_' + time.strftime("%M_%S")
+      ensure_dir_cd_in(currentTime) #hopefully in the directory now
+  
+      for x in range(0,3):  #Blick da LED
+          GPIO.output(ledPin, GPIO.HIGH)
+          time.sleep(0.075)
+          GPIO.output(ledPin, GPIO.LOW)
+          time.sleep(0.075)
+  
+      while 1:
+          if not GPIO.input(cameraButton): # camera button is pressed
+              pwm.ChangeDutyCycle(dc)
+              GPIO.output(ledPin, GPIO.LOW)
+          elif not GPIO.input(shutdownButton): # shutdown button is pressed
+              pwm.stop() # stop PWM
+              GPIO.cleanup() # cleanup all GPIO
+              os.system("sudo shutdown -h now") #this will abruptly halt now
+          else: # button is pressed:
+              pwm.ChangeDutyCycle(100-dc)
+              GPIO.output(ledPin, GPIO.HIGH)
+              time.sleep(0.075)
+              GPIO.output(ledPin, GPIO.LOW)
+              time.sleep(0.075)
 except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
     pwm.stop() # stop PWM
     GPIO.cleanup() # cleanup all GPIO
