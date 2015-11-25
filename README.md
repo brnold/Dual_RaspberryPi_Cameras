@@ -1,9 +1,7 @@
-##
+## Python Script for taking pictures using the raspberry pi camera
 
-## ToDo
+## It works
 
-Add the correct pin
+Will shut down pi when done.
 
-Add the loop logic
-
-add the setup stuff
+Make a deceient readme, 
