@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 #First, this was copied from,  https://learn.sparkfun.com/tutorials/raspberry-gpio/python-rpigpio-example, then modified
 #
 # Authored by Benjamin Nold
@@ -77,11 +79,6 @@ try:
 		flash_LED(.25)     
      		print('picture has been taken. Pic ' + str(pictureNum))
 		pictureNum += 1 
- 
-
-
-
-
 	
 
  #   while 1:
@@ -99,11 +96,10 @@ try:
  #           GPIO.output(ledPin, GPIO.LOW)
  #           time.sleep(0.075)
 
+     GPIO.cleanup()
+     os.system('echo "halt is here"')
+     os.system('sudo halt')
+
 except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
     pwm.stop() # stop PWM
     GPIO.cleanup() # cleanup all GPIO
-
-
-GPIO.cleanup()
-os.system('echo "halt is here"')
-os.system('sudo halt')
