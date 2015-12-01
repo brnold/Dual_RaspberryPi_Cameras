@@ -19,6 +19,7 @@
 import RPi.GPIO as GPIO
 import time
 import os
+import sys
 
 #Camera Command line
 
@@ -96,8 +97,10 @@ try:
  #           GPIO.output(ledPin, GPIO.LOW)
  #           time.sleep(0.075)
 
-
+     GPIO.cleanup()
+     os.system("sudo shutdown -h now")
 
 except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
     pwm.stop() # stop PWM
+    sys.exit()
     GPIO.cleanup() # cleanup all GPIO
