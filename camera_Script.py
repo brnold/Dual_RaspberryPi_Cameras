@@ -61,7 +61,7 @@ pwm.start(dc)
 print("Here we go! Press CTRL+C to exit, button shuts down the Pi (maybe")
 try:
 
-     currentTime = './Pic_' + time.strftime("%M_%S")
+     currentTime = './Pics/Pic_' + time.strftime("%M_%S")
      ensure_dir_cd_in(currentTime) #hopefully in the directory now
      for x in range(0,3):  #Blick da LED
         	GPIO.output(ledPin, GPIO.HIGH)
