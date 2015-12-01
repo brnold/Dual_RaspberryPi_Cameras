@@ -96,9 +96,7 @@ try:
  #           GPIO.output(ledPin, GPIO.LOW)
  #           time.sleep(0.075)
 
-     GPIO.cleanup()
-     os.system('echo "halt is here"')
-     os.system('sudo halt')
+
 
 except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
     pwm.stop() # stop PWM
