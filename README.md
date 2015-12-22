@@ -1,7 +1,5 @@
-## Python Script for taking pictures using the raspberry pi camera
+# Python Script for taking pictures using the raspberry pi camera
 
-## It works
+This scrip works with the GPIO pins on the Raspberry Pi to allow of headless (screenless) picture capturing. You can even shut down the pi when your done via the GPIO.
 
-Will shut down pi when done.
-
-Make a deceient readme, 
+I had to edit my ~/.bashrc file to allow the scipt to run at startup and use raspi-config to auto-login to the shell.
